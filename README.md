@@ -4,7 +4,7 @@
 AlertCall是一款手机自动拨打电话安卓APP，用于运维场景告警根据接口按顺序自动拨打电话直到接通或者完成全部拨打，支持是否接通回调。同时支持根据短信内容拨打电话，适用于公司小组团队对外一个号码，定时设置呼叫转移场景。
 
 ![avatar](https://oscimg.oschina.net/oscnet/up-f98dda2e832d6e87e535d9419e1d3537ca7.png)
-![avatar](https://oscimg.oschina.net/oscnet/up-f566ba2159f1212470aeaf4fa25aff8aa3d.png)
+![avatar](https://oscimg.oschina.net/oscnet/up-65b68ac374cd05994238014ede9719a2b82.png)
 ![avatar](https://oscimg.oschina.net/oscnet/up-1d8358320fd5b328f75adb8e7a1c47d8e69.png)
 
 #### 软件架构
