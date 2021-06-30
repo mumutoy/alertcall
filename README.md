@@ -14,7 +14,7 @@ AutoCall是一款安卓手机APP，用于运维场景告警根据接口自动拨
 
 #### 安装教程
 
-1. APP百度网盘下载地址：https://pan.baidu.com/s/1SJtY9U3K54ISbwo9HiMuSg,或使用idea打开编译生成apk
+1. 使用idea打开编译生成apk安装,或见APP百度网盘下载地址：https://pan.baidu.com/s/1SJtY9U3K54ISbwo9HiMuSg
 2. 服务端接口参考使用说明实现自行结合业务场景完善,已有案例是接通后挂断查看微信或短信告警并显示谁接通,如未接通则显示告警无响应
 3. 遇到问题：微信搜索ahauzyy
 
