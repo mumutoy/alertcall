@@ -3,13 +3,13 @@
 #### 介绍
 AlertCall是一款手机自动拨打电话安卓APP，用于运维场景告警根据接口按顺序自动拨打电话直到接通或者完成全部拨打，支持是否接通回调。同时支持根据短信内容拨打电话，适用于公司小组团队对外一个号码，定时设置呼叫转移场景。
 
-![avatar](https://oscimg.oschina.net/oscnet/up-f98dda2e832d6e87e535d9419e1d3537ca7.png)
+![avatar](https://oscimg.oschina.net/oscnet/up-3d21c7cbf0191c38118f4f8d32309d94791.png)
 ![avatar](https://oscimg.oschina.net/oscnet/up-65b68ac374cd05994238014ede9719a2b82.png)
 ![avatar](https://oscimg.oschina.net/oscnet/up-1d8358320fd5b328f75adb8e7a1c47d8e69.png)
 
 #### 软件架构
 1. 定时循环告警电话接口按顺序拨打电话直到接通或完成全部拨打，拨打完成回调接口设置是否接通
-2. 监听包含关键词autocall短信提取号码拨打
+2. 监听包含关键词alertcall短信提取号码拨打
 
 
 #### 安装教程
@@ -45,14 +45,14 @@ curl -X POST 'http://192.168.1.8:8080/alert/phone?mid=60d536885fa2a8643fa4d3a0&r
 
  
 
-#基于tornado+mongodb代码示例，autocall为电话队列库，asa为告警消息库，duty为值班库，自行结合业务修改
+#基于tornado+mongodb代码示例，alertcall为电话队列库，asa为告警消息库，duty为值班库，自行结合业务修改
  
     class AlertPhoneHandler(BaseMisHandler):
      def get(self):
         res={}
         phones=[]
         #读取一条未处理告警，该告警包含电话号码
-        info=mgdb.autocall.find_one({'iscall': 0})
+        info=mgdb.alertcall.find_one({'iscall': 0})
         if not info:
             self.write(result_dic(1,"无告警"))
             return
@@ -73,9 +73,9 @@ curl -X POST 'http://192.168.1.8:8080/alert/phone?mid=60d536885fa2a8643fa4d3a0&r
         resp = self.get_argument('resp', None)
         #标记电话已处理
         record={'iscall':1}
-        mgdb.autocall.update({'_id': ObjectId(mid)},{'$set': record},upsert=False)
+        mgdb.alertcall.update({'_id': ObjectId(mid)},{'$set': record},upsert=False)
         if resp:
-            info=mgdb.autocall.find_one({"_id":ObjectId(mid)})
+            info=mgdb.alertcall.find_one({"_id":ObjectId(mid)})
             #响应人读取值班库转换成人名
             tel=mgdb.duty.find_one({"telNo":resp})
             if tel:
@@ -90,11 +90,11 @@ curl -X POST 'http://192.168.1.8:8080/alert/phone?mid=60d536885fa2a8643fa4d3a0&r
 
 **4. 发送短信拨打号码**
 ```
-短信格式：|呼叫号码|autocall|自定义内容
-举例：|18712345678|autocall|今天你值班
+短信格式：|呼叫号码|alertcall|自定义内容
+举例：|18712345678|alertcall|今天你值班
 适用场景，对外一个号码，改号码收到短信自动设置呼叫转移为值班人员
 电信呼叫转移：
-|*7218712345678|autocall|今天你值班，已设置呼叫转移为你
+|*7218712345678|alertcall|今天你值班，已设置呼叫转移为你
 【电信是*72,其它运营商的sim可请自行查询】
 ```
 **5. APP设置**
