@@ -40,11 +40,6 @@ public class SmsReceiver extends BroadcastReceiver {
             Intent i = new Intent(context,CallForwardService.class);
             i.putExtra("content",str);
             context.startService(i);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(i);
-            } else {
-                context.startService(i);
-            }
         }
 
     }
