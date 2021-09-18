@@ -47,6 +47,18 @@
             android:inputType="text"
             android:id="@+id/etApiTime" />
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="接口异常通知人(间隔3分钟):"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:inputType="text"
+            android:id="@+id/etApiTel" />
 
     <Button
             android:id="@+id/btnset"
@@ -70,7 +82,7 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="短信格式：|号码|autocall(默认)|自定义内容\n权限：请开启(通知类)短信读取权限\n拨打电话权限\n电信无条件呼叫转移：|*72手机号|autocall(默认)|自定义内容\n锁屏：小米手机开发者选项关闭锁屏\n支持退出主界面运行,通知栏有运行图标"
+            android:text="短信格式：|号码|alertcall(默认)|自定义内容\n权限：请开启(通知类)短信读取权限和拨打电话权限\n电信无条件呼叫转移：|*72手机号|alertcall(默认)|自定义内容\n锁屏：小米手机开发者选项关闭锁屏\n支持退出主界面运行,通知栏有运行图标\n读取短信挂断：发送包含downcall关键词"
     />
         </LinearLayout>
 

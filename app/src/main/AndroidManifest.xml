@@ -12,7 +12,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.PROCESS_OUTGOING_CALLS" />
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -27,6 +28,11 @@
                 android:exported="true">
             <intent-filter  android:priority="1000">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".OutCallEnd">
+            <intent-filter>
+                <action android:name="android.intent.action.PRECISE_CALL_STATE" />
             </intent-filter>
         </receiver>
         <activity android:name="com.mjzhou.alertcall.MainActivity">

@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.IBinder;
 import android.util.Log;
 
-
 import java.util.Date;
 
 public class CallForwardService extends Service {
@@ -23,7 +22,6 @@ public class CallForwardService extends Service {
     @Override
     public int onStartCommand(final Intent intent, int flags, int startId) {
         //这里开辟一条线程,用来执行具体的逻辑操作:
-
         new Thread(new Runnable() {
             final Intent it = new Intent();
             @Override

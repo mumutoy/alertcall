@@ -18,10 +18,12 @@ public class MainActivity extends AppCompatActivity {
 
     private  EditText etApi;
     private  EditText etApiTime;
+    private  EditText etApiTel;
     private  EditText etLog;
     private  Button btnSet;
     private  String strApi;
     private  String strApiTime;
+    private  String strApiTel;
     private SharedPreferencesUtils sh;
     public  static Handler handler;
     String TAG = "MainActivity";
@@ -34,22 +36,28 @@ public class MainActivity extends AppCompatActivity {
 
         etApi =  findViewById(R.id.etApi);
         etApiTime =  findViewById(R.id.etApiTime);
+        etApiTel =  findViewById(R.id.etApiTel);
         sh =  new  SharedPreferencesUtils();
 
         strApi=sh.getParam( MainActivity.this,"strApi","").toString();
         strApiTime= sh.getParam( MainActivity.this,"strApiTime","").toString();
-        if("".equals(strApi)){
+        strApiTel= sh.getParam( MainActivity.this,"strApiTel","").toString();
+        if("".equals(strApiTel)){
             Log.e(TAG,"请设置url参数");
             sh.setParam( MainActivity.this,"strApi","http://14.215.177.39/alert/phone");
-            sh.setParam( MainActivity.this,"strApiTime",10);
+            sh.setParam( MainActivity.this,"strApiTime","10");
+            sh.setParam( MainActivity.this,"strApiTel","1871234567");
             etApi.setText("http://14.215.177.39/alert/phone",EditText.BufferType.EDITABLE);
             etApiTime.setText("10",EditText.BufferType.EDITABLE);
+            etApiTel.setText("1871234567",EditText.BufferType.EDITABLE);
         }else {
             strApi=sh.getParam( MainActivity.this,"strApi","").toString();
             Log.e(TAG,strApi);
             strApiTime= sh.getParam( MainActivity.this,"strApiTime","").toString();
+            strApiTel= sh.getParam( MainActivity.this,"strApiTel","").toString();
             etApi.setText(strApi,EditText.BufferType.EDITABLE);
             etApiTime.setText(strApiTime,EditText.BufferType.EDITABLE);
+            etApiTel.setText(strApiTel,EditText.BufferType.EDITABLE);
         }
         //申请接受短信权限
 
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     this.startService(new Intent(this, CallService.class));
                 }
+                this.startService(new Intent(this, CallService.class));
 
 
             }
@@ -98,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 strApi = etApi.getText().toString();
                 strApiTime= etApiTime.getText().toString();
+                strApiTel= etApiTel.getText().toString();
                 sh.setParam( MainActivity.this,"strApi",strApi);
                 sh.setParam( MainActivity.this,"strApiTime",strApiTime);
+                sh.setParam( MainActivity.this,"strApiTel",strApiTel);
                 etLog.setText("更新中...");
                 Log.d(TAG,"已设置"+strApi);
                 Toast ts = Toast.makeText(getBaseContext(),"设置已生效", Toast.LENGTH_LONG);

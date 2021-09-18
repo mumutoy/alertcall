@@ -164,6 +164,11 @@ public class CallService extends Service {
                 return false;
             }
         }else {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return checkDial(number,ts);
         }
     }
@@ -188,16 +193,19 @@ public class CallService extends Service {
                 String realPhone="";
                 long startStamp =new Date().getTime();
                 Thread.sleep(30000);
+
                 while(true){
                     try {
+                        //String strApiTel=sh.getParam( CallService.this,"strApiTel","").toString();
                         String strApi=sh.getParam( CallService.this,"strApi","").toString();
                         if("".equals(strApi)){
                             Log.e(TAG,"请设置url参数");
                         }
+                        Log.d(TAG,android.os.Build.MODEL);
                         String url = strApi;
                         OkHttpClient okHttpClient = new OkHttpClient();
                         final Request request = new Request.Builder()
-                                .url(url)
+                                .url(url).addHeader("model",android.os.Build.MODEL)
                                 .build();
                         final Call call = okHttpClient.newCall(request);
                         JSONObject jsonObject=null;
@@ -207,6 +215,7 @@ public class CallService extends Service {
                         }catch(Exception e){
                             Log.e(TAG, "接口异常\n"+e);
                             runLog("接口异常请检查或更新");
+                            //call(strApiTel);
                             Thread.sleep(15000);
                             continue;
                         }
