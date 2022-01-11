@@ -147,6 +147,7 @@ public class CallService extends Service {
     //号码是否接通
     private  boolean checkDial(String number,Long ts){
         String call=getCallDetails();
+        Log.d(TAG, "读取的最后通话记录"+call);
         String[] split = call.split(",",4);
         String phone = split[0];
         Log.d(TAG, "检查是否接听"+number);
@@ -155,6 +156,12 @@ public class CallService extends Service {
         //获取大于给定时间戳通话记录,并判断是否接听
         if(recordTs<ts){
             Log.d(TAG, "未产生接听记录"+number);
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Log.d(TAG, "recordTs<ts电话拨打开始时间"+ts);
             return checkDial(number,ts);
         }
         if(phone.equals(number)){
@@ -164,12 +171,13 @@ public class CallService extends Service {
                 return false;
             }
         }else {
+            Log.d(TAG, "phone_else电话拨打开始时间"+ts);
             try {
-                Thread.sleep(1000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            return checkDial(number,ts);
+            return false;
         }
     }
 
